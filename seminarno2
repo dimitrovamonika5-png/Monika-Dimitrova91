@@ -1,0 +1,344 @@
+#include <stdio.h>
+#include <string.h>
+int max(int a, int b){
+    if (a >b)
+        return a;
+    else
+        return b;
+}
+int min(int a, int b)
+{
+    if(a < b)
+        return a;
+    else
+        return b;
+}
+int main(){
+int izbor;
+
+    printf("\n vuvedete zadacha 1-12:");
+    scanf("%d", &izbor);
+    switch (izbor){
+        case 1: zad1(); break;
+        case 2: zad2(); break;
+        case 3: zad3(); break;
+        case 4: zad4(); break;
+        case 5: zad5(); break;
+        case 6: zad6(); break;
+        case 7: zad7(); break;
+        case 8: zad8(); break;
+        case 9: zad9(); break;
+        case 10: zad10(); break;
+        case 11: zad11(); break;
+        case 12: zad12(); break;
+        
+    }
+    return 0;
+}
+
+
+int zad1(){
+int num;
+    int maxNum, minNum;
+    printf("Vavedi chisla (0 za krai):\n");
+    scanf("%d",&num);
+    maxNum = num;
+    minNum = num;
+    while(num != 0){
+        scanf("%d",&num);
+
+        if(num == 0)
+            break;
+
+        maxNum = max(maxNum, num);
+        minNum = min(minNum, num);
+}
+
+    printf("Nai-golyamo: %d\n", maxNum);
+    printf("Nai-malko: %d\n", minNum);
+
+    return 0;
+}
+
+int zad2(){
+    int hour, minute;
+   printf("Vuvedi chas: ");
+    scanf("%d", &hour);
+    printf("Vuvedi minuti: ");
+    scanf("%d", &minute);
+    minute = minute + 15;
+    if(minute >= 60){
+        hour = hour + 1;
+        minute = minute - 60;
+}
+    if(hour == 24){
+        hour = 0;
+}
+    printf("%d:%02d", hour, minute);
+    return 0;
+}
+
+int zad3(){
+    int a;
+int b;
+int c;
+    printf("Vuvedi purvo chislo: ");
+    scanf("%d", &a);
+    printf("Vuvedi vtoro chislo: ");
+    scanf("%d", &b);
+    printf("Vuvedi treto chislo: ");
+    scanf("%d", &c);
+    if(a == b && b == c)
+        printf("yes");
+    else
+        printf("no");
+    return 0;
+}
+
+int zad4(){
+    int points;
+    double bonus = 0;
+    printf("Vuvedi broi tochki: ");
+    scanf("%d", &points);
+    if(points <= 100)
+        bonus = 5;
+    else if(points <= 1000)
+        bonus = points * 0.2;
+    else
+        bonus = points * 0.1;
+    if(points % 2 == 0)
+        bonus = bonus + 1;
+    if(points % 10 == 5)
+        bonus = bonus + 2;
+    printf("Bonus tochki: %.1f\n", bonus);
+    printf("Obshto tochki: %.1f\n", points + bonus);
+    return 0;
+}
+
+
+int zad5(){
+    int t1;
+int t2;
+int t3;
+int total;
+int minutes;
+int seconds;
+printf("vuvedet vreme na 1 sustezatel:");
+scanf("%d",&t1);
+printf("vuvedete vreme na 2 sustezatel:");
+scanf("%d", &t2);
+printf("vuvedete vreme na 3 sustezatel:");
+scanf("%d", &t3);
+total =t1+t2+t3;
+minutes= total/60;
+seconds= total%60; 
+ printf("%d:%02d\n", minutes, seconds);
+ return 0;
+}
+
+int zad6(){
+double x;
+double y;
+double x1;
+double y1;
+double x2;
+double y2;
+
+printf("stoinost na x1=");
+scanf("%lf", &x1);
+printf("stoinost na y1=");
+scanf("%lf", &y1);
+printf("stoinost na x2=");
+scanf("%lf", &x2);
+printf("vuvedete stoinosti na y2=");
+scanf("%lf", &y2);
+printf("vuvedet stoinost na x=");
+scanf("%lf", &x);
+printf("vuvedete stoinost na y=");
+scanf("%lf", &y);
+ if(x >= x1 && x <= x2 && y >= y1 && y <= y2)
+    printf("Inside\n");
+    else
+    printf("Outside\n");
+    return 0;
+}
+
+int zad7(){
+    double n;
+    double taxiPrice;
+    double busPrice = 1e9;
+    double trainPrice = 1e9;
+    char period;
+    char transport[10];
+    printf("Vuvedi razstoqnie v kilometri: ");
+    scanf("%lf", &n);    printf("Vuvedi period ot denya (D za den / N za nosht): ");
+    scanf(" %c", &period);
+    if(period == 'D')
+        taxiPrice = 0.70 + n * 0.79;
+    else
+        taxiPrice = 0.70 + n * 0.90;
+    if(n >= 20)
+        busPrice = n * 0.09;
+    if(n >= 100)
+        trainPrice = n * 0.06;
+    double minPrice = taxiPrice;
+    strcpy(transport, "Taxi");
+    if(busPrice < minPrice){
+        minPrice = busPrice;
+        strcpy(transport, "Bus");
+    }
+    if(trainPrice < minPrice){
+        minPrice = trainPrice;
+        strcpy(transport, "Train");
+    }
+    printf("Nai-dobriyat transport e: %s\n", transport);
+    printf("Cenata: %.2f\n", minPrice);
+
+    return 0;
+}
+
+int zad8(){
+double V;
+double d1;
+double d2;
+double N;
+printf("vuvedete obema na baseina:");
+scanf("%lf", &V);
+printf("vuvedi debit na 1 truba");
+scanf("%lf", &d1);
+printf("vuvedete debit na 2 truba:");
+scanf("%lf", &d2);
+printf("vuvedete broi na chasovete:");
+scanf("%lf", &N);
+double V_liters = V * 1000;
+double water = (d1 + d2) * N;
+ if(water >= V_liters)
+    printf("Baseynat e pqlen!\n");
+    else
+    printf("Baseynat e %.2f%% pulen\n", (water / V_liters) * 100);
+    return 0;
+}
+
+int zad9(){
+int X;
+int Y;
+int Z;
+int workers;
+printf("vuvedete ploshta na poleto:");
+scanf("%d", &X);
+printf("vuvedete kg grozde na edin kvadraten metur");
+scanf("%d", &Y);
+printf("vuvedetge jelanite litri vino za prodajba");
+scanf("%d", &Z);
+printf("broi rabotnici na poleto:");
+scanf("%d", &workers);
+double totalGrapes = X * Y;
+double grapesForWine = totalGrapes * 0.4;
+double wineProduced = grapesForWine / 2.5;
+    printf("Proizvedeno vino: %.2f litra\n", wineProduced);
+    if(wineProduced >= Z) {
+        printf("Vinoto e dostatuchno za prodan!\n");
+        double leftover = wineProduced - Z;
+        double perWorker = leftover / workers;
+        printf("Ostatak za rabotnitsite: %.2f litra na rabotnik\n", perWorker);
+    } else {
+        double shortage = Z - wineProduced;
+        printf("Nedostatuchno vino! Otnema se: %.2f litra\n", shortage);
+    }
+    return 0;
+}
+
+int zad10(){
+    int n;
+    printf("Vuvedi broy chisla: ");
+    scanf("%d", &n);
+int num;
+int count1 = 0, count2 = 0, count3 = 0, count4 = 0, count5 = 0;
+for(int i = 0; i < n; i++){
+    printf("Vuvedi chislo %d: ", i+1);
+    scanf("%d", &num);
+    if(num < 200)
+        count1++;
+    else if(num <= 399)
+        count2++;
+    else if(num <= 599)
+        count3++;
+    else if(num <= 799)
+        count4++;
+    else
+        count5++;
+    }
+    double p1 = (count1 * 100.0) / n;
+    double p2 = (count2 * 100.0) / n;
+    double p3 = (count3 * 100.0) / n;
+    double p4 = (count4 * 100.0) / n;
+    double p5 = (count5 * 100.0) / n;
+    printf("p1: %.2f%%\n", p1);
+    printf("p2: %.2f%%\n", p2);
+    printf("p3: %.2f%%\n", p3);
+    printf("p4: %.2f%%\n", p4);
+    printf("p5: %.2f%%\n", p5);
+    return 0;
+}
+
+
+int zad11(){
+    int n;
+printf("Vuvedi chislo n: ");
+scanf("%d", &n);
+int towerWidth = n / 2;   
+int middleSpace = n * 2 - 2 * towerWidth - 2; 
+printf("/");
+for(int i = 0; i < towerWidth; i++) printf("^");
+printf("\\");
+for(int i = 0; i < middleSpace; i++) printf("_");
+printf("/");
+for(int i = 0; i < towerWidth; i++) printf("^");
+printf("\\\n");
+for(int i = 0; i < n - 2; i++) {
+printf("|");
+for(int j = 0; j < 2 * n - 2; j++) printf(" ");
+printf("|\n");
+}
+printf("\\");
+for(int i = 0; i < towerWidth; i++) printf("_");
+printf("/");
+for(int i = 0; i < middleSpace; i++) printf(" ");
+printf("\\");
+for(int i = 0; i < towerWidth; i++) printf("_");
+printf("/\n");
+return 0;
+}
+
+int zad12(){
+int n;
+printf("vuvedete chislo n:");
+scanf("%d", &n);
+ int width = n - 1;
+    for(int i = 0; i < n-2; i++){
+        if(i % 2 == 0) {
+        for(int j = 0; j < width; j++) printf("*");
+        printf("\\ /");
+        for(int j = 0; j < width; j++) printf("*");
+} 
+else{
+    for(int j = 0; j < width; j++) printf("-");
+    printf("\\ /");
+    for(int j = 0; j < width; j++) printf("-");
+}
+printf("\n");
+    }
+for(int i = 0; i < n-1; i++) printf(" "); // отместване
+printf("@\n");
+for(int i = 0; i < n-2; i++){
+if(i % 2 == 0) {
+            for(int j = 0; j < width; j++) printf("*");
+            printf("/ \\");
+            for(int j = 0; j < width; j++) printf("*");}
+         else{
+            for(int j = 0; j < width; j++) printf("-");
+            printf("/ \\");
+            for(int j = 0; j < width; j++) printf("-");}
+        printf("\n");}
+    return 0;
+}
