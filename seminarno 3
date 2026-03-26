@@ -1,0 +1,323 @@
+#include <stdio.h>
+int main(){
+int izbor;
+
+    printf("\n vuvedete zadacha 1-9:");
+    scanf("%d", &izbor);
+    switch (izbor){
+        case 1: zad1(); break;
+        case 2: zad2(); break;
+        case 3: zad3(); break;
+        case 4: zad4(); break;
+        case 5: zad5(); break;
+        case 6: zad6(); break;
+        case 7: zad7(); break;
+        case 8: zad8(); break;
+        case 9: zad9(); break;
+        
+    }
+    return 0;
+}
+
+
+int zad1(){
+    int n;
+    printf("vuvedete broi elementi:");
+    scanf("%d", &n);
+    int arr[n];
+    printf("vuvedete elementite:\n");
+    for(int i=0; i<n; i++){
+        scanf("%d", &arr[i]);
+    }
+int current_len=1;
+int max_len=1;
+int start = 0;
+int best_start = 0;
+    for(int i = 1; i < n; i++) {
+        if(arr[i] == arr[i - 1]) {
+            current_len++;
+        } else {
+            current_len = 1;
+            start = i;
+        }
+        if(current_len > max_len) {
+            max_len = current_len;
+            best_start = start;
+        }
+    }
+
+    printf("Nachalo na nai-dulgata ploshtadka: %d\n", best_start);
+    printf("Duljina: %d\n", max_len);
+
+    return 0;
+}
+
+int zad2() {
+int n;
+printf("vuvedete broi elementi;");
+scanf("%d", &n);
+int arr[n];
+printf("Vuvedi elementite:\n");
+  for(int i = 0; i < n; i++) {
+    scanf("%d", &arr[i]);
+    }
+int valid=1;
+  for(int i = 0; i < n - 1; i++) {
+    if(i % 2 == 0) {
+    if(arr[i] >= arr[i + 1]) {
+valid = 0;
+break;
+}
+  } else {
+    if(arr[i] <= arr[i + 1]) {
+    valid = 0;
+    break;
+ }
+ }
+ }
+
+if(valid) {
+printf("Redicata e pravilna.\n");
+} else {
+printf("Redicata NE e pravilna.\n");
+}
+
+return 0;
+}
+
+int zad3(){
+int n;
+printf("vuvedete broi elementi:");
+scanf("%d", &n);
+int arr[n];
+printf("vuvedete elementite\n");
+for (int i=0; i<n; i++){
+  scanf("%d", &arr[i]);
+}
+for(int i = 0; i < n / 2; i++) {
+int temp = arr[i];
+arr[i] = arr[n - 1 - i];
+arr[n - 1 - i] = temp;
+}
+printf("oburnat masiv:");
+for (int i=0; i<n;i++){
+  printf("%d", arr[i]);
+}
+return 0;
+}
+  
+
+int zad4(){
+int n;
+int k;
+printf("vuvedete broi elementi:");
+scanf("%d", &n);
+int arr[n];
+int result[n];
+printf("vuvedete elemntite:");
+for (int i=0; i<n; i++){
+  scanf("%d", &arr[i]);
+}
+printf ("vuvedete K:");
+scanf("%d", &k);
+k=k%n;
+for(int i=0; i<n; i++){
+  result[(i+k)%n]=arr[i];
+
+}
+printf("noviqt masiv e:\n");
+for (int i=0; i<n; i++){
+printf("%d", result[i]);
+}
+return 0;
+}
+
+int zad5()
+{
+int n;
+int k;
+printf("vuvedete broi elementi:");
+scanf("%d", &n);
+int arr[n];
+printf("Vuvedete elementite:");
+for(int i=0; i<n; i++){
+  scanf("%d", &arr[i]);
+}
+printf("vuvedete k");
+scanf("%d", &k);
+for (int i =0; i<n; i++){
+  for (int j=i+1; j<n; j++){
+      if(arr[i]< arr[j]){
+        int temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+      }
+  }
+}
+printf(" k-tiqt element ot masiwa e: %d\n", arr[k-1]);
+return 0;
+}
+
+int zad6(){
+    int n;
+printf("vuvedete broi chisla");
+scanf("%d", &n);
+int arr[n];
+printf("vuvedete chislata:");
+for( int i=0; i<n; i++){
+  scanf("%d", &arr[i]);
+}
+int max_inc_len = 0;
+int start_inc = 0;
+for(int i = 0; i < n; i++) {
+int len = 1;
+  for(int j = i + 1; j < n; j++) {
+    if(arr[j] > arr[j-1]) {
+    len++;
+} else {
+break;
+}
+}
+if(len > max_inc_len) {
+  max_inc_len = len;
+  start_inc = i;
+}
+}
+int max_dec_len = 0;
+int start_dec = 0;
+for(int i = 0; i < n; i++) {
+  int len = 1;
+    for(int j = i + 1; j < n; j++) {
+      if(arr[j] < arr[j-1]) {
+      len++;
+} else {
+break;
+}
+}
+if(len > max_dec_len) {
+max_dec_len = len;
+start_dec = i;
+}
+}
+printf("nai-dulgata narastvashta poredica:");
+for(int i=start_inc; i<start_inc+ max_inc_len; i++){
+  printf("%d", arr[i]);
+}
+printf("\n");
+printf("nai dulgata namalqwashta poredica:");
+for( int i=start_dec; i<start_dec+max_dec_len; i++){
+  printf("%d", arr[i]);
+}
+printf("\n");
+return 0;
+}
+
+
+int zad7(){
+    int n;
+printf("vuvedete broq chisla:");
+scanf("%d", &n);
+int arr[n];
+printf("vuvedete chislata:");
+for (int i=0; i<n; i++){
+  scanf("%d", &arr[i]);
+}
+int target;
+printf("vuvedte chisloto za suma");
+scanf("%d", &target);
+int found=0;
+for (int i=0; i<n; i++){
+  int sum =0;
+  for(int j=i; j<n; j++){
+    sum +=arr[j];
+    if (sum==target){
+ printf("posledovatelnostta e:");
+    for (int k=i; k<=j; k++){
+      printf("%d", arr[k]);
+    }
+    printf("\n");
+    found=1;
+    break;
+  }
+}
+if (found) break;
+    }
+    if(!found){
+      printf("nqma posledovatelnost s takava suma\n");
+    }
+  return 0; 
+}
+
+int zad8(){
+    
+int arr[20];
+int n=10;
+int i;
+int num; 
+int index;
+printf("vuvedete 10chisla:");
+for(int i=0; i<n; i++){
+  scanf("%d", &arr[i]);
+
+}
+while(n<20){
+  printf("vuvedte chislo za vzimane(0 za krai)");
+  scanf("%d", &num);
+  if( num==0) break;
+  printf("vuvedte index(0-%d)", n);
+  scanf("%d", &index);
+  if(index < 0 || index > n) {
+  printf("Greshen indeks!\n");
+  continue; 
+}
+for(i = n; i > index; i--) {
+arr[i] = arr[i-1];
+}
+arr[index] = num;
+n++;
+printf("Masiv sled vmazvaneto: ");
+for(i = 0; i < n; i++) {
+printf("%d ", arr[i]);
+}
+printf("\n");
+}
+printf("Finalen masiv: ");
+  for(i = 0; i < n; i++) {
+  printf("%d ", arr[i]);
+}
+printf("\n");
+return 0;
+}
+
+int zad9(){
+    int n;
+printf("Vuvedete broq na elementite: ");
+  scanf("%d", &n);
+int arr[n];
+  printf("Vuvedete elementite: ");
+    for(int i = 0; i < n; i++) {
+    scanf("%d", &arr[i]);
+}
+int max_len = 1;
+int curr_len = 1;
+int value = arr[0];
+int curr_value = arr[0]; 
+for(int i = 1; i < n; i++) {
+  if(arr[i] == arr[i-1]) {
+  curr_len++;
+} else {
+  curr_len = 1;
+  curr_value = arr[i];
+}
+if(curr_len > max_len) {
+  max_len = curr_len;
+  value = curr_value; 
+}
+    }
+printf("Maximalnata redica e: ");
+  for(int i = 0; i < max_len; i++) {
+  printf("%d ", value);
+}
+printf("\n");
+return 0;
+}
