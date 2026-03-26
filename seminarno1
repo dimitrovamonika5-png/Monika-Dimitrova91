@@ -1,0 +1,310 @@
+#include <stdio.h>
+#include<math.h>
+int main()
+{
+    int izbor;
+
+    printf("\n vuvedete zadacha 1-16:");
+    scanf("%d", &izbor);
+    switch (izbor){
+        case 1: zadacha1(); break;
+        case 2: zadacha2(); break;
+        case 3: zadacha3(); break;
+        case 4: zadacha4(); break;
+        case 5: zadacha5(); break;
+        case 6: zadacha6(); break;
+        case 7: zadacha7(); break;
+        case 8: zadacha8(); break;
+        case 9: zadacha9(); break;
+        case 10: zadacha10(); break;
+        case 11: zadacha11(); break;
+        case 12: zadacha12(); break;
+        case 13: zadacha13(); break;
+        case 14: zadacha14(); break;
+        case 15: zadacha15(); break;
+        case 16: zadacha16(); break;
+
+}
+return 0;
+}
+int zadacha1(){
+    char *numbers[]= {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
+    for(int i=0; i<10; i++ ){
+printf("%s\n", numbers[i]);
+    }
+    return 0; 
+}
+int zadacha2(){
+    for (int i=1; i<=10; i++)
+{
+    for (int j=1; j<=i; j++){
+      printf("*");  
+    }
+printf("\n");}
+
+return 0;
+}
+
+int zadacha3(){
+    int i;
+     char c;
+     printf("vuvedete znak:");
+     scanf( "%c", &c);
+    for(i=0; i<10; i++)
+    printf("%c", c);
+printf("\n");
+    for( i=0; i<3; i++){
+ printf("%c", c);
+ printf("       ");
+ printf("%c\n",c);
+    }
+   
+    for(i=0; i<10; i++)
+    printf("%c", c);
+return 0;
+}
+
+int zadacha4(){
+     int i;
+    char v; 
+    printf("vuvedete znak");
+
+scanf("%c", &v);
+printf("   %c\n", v);
+printf("  %c  %c\n",v,v );
+printf(" %c    %c\n",v,v);
+printf("%c      %c\n",v,v);
+for (int i=0; i<9; i++)printf("%c", v);
+printf("\n\n");
+
+for(int i = 0; i < 9; i++) printf("%c", v);
+    printf("\n");
+    printf("%c      %c\n", v, v);
+    printf(" %c    %c\n", v, v);
+    printf("  %c  %c\n", v, v);
+    printf("   %c\n", v);
+return 0;
+}
+
+int zadacha5(){
+     int i;
+
+    printf("Vuvedi inchove: ");
+    scanf("%d", &i);
+    int mm=i*25.4;
+    int sm=10*mm;
+    int dm=10*sm;
+    int m=10*dm;
+    printf("vashite inchove , v:\n mm - %d\n sm - %d\n dm - %d\n m-%d", mm, sm, dm, m);
+    return 0;
+}
+
+int zadacha6(){
+    int celsius, fahrenheit;
+printf("vuvedete temperatura v celzii:");
+   scanf("%d", &celsius);
+   fahrenheit = celsius*9/5+32;
+   printf("%d C=%d F\n",celsius, fahrenheit );
+   return 0;
+}
+
+int zadacha7(){
+     int degrees, radians;
+   printf("vuvedete gradusi:"); 
+   scanf("%d", &degrees);
+   radians=degrees *314/180;
+   printf("%d gradusi=%d/100 radiani\n ", degrees, radians);
+   return 0;
+}
+
+int zadacha8(){
+    int leva;
+  int euro, pound, usd;
+  printf("vuvedete suma v levove:");
+  scanf("%d", &leva);
+  usd= leva*55/100;
+  euro= leva*51/100;
+  pound= leva*44/100;
+  printf("%d leva = %d USD\n", leva, usd);
+    printf("%d leva = %d EUR\n", leva, euro);
+    printf("%d leva = %d P\n", leva, pound);
+    return 0;
+}
+
+int zadacha9(){
+     int a;
+  int b;
+  int h;
+  int S;
+  printf("vuvedete duljinata na trapec a=");
+  scanf("%d", &a);
+  printf("vuvedete duljinata b=");
+  scanf("%d", &b);
+  printf( "vuvedete visochinata h=");
+  scanf("%d", &h);
+  S = (a+b)*h/2;
+  printf("liceto na trapec e: %d\n", S);
+  return 0;
+}
+
+int zadacha10(){
+    double gradusi, radiani;
+
+    printf("Vuvedete ugl v gradusi: ");
+    scanf("%lf", &gradusi);
+
+    radiani = gradusi * 3.141592653589793 / 180;
+
+    printf("sin(%.2lf°) = %.4lf\n", gradusi, sin(radiani));
+    printf("cos(%.2lf°) = %.4lf\n", gradusi, cos(radiani));
+    printf("tan(%.2lf°) = %.4lf\n", gradusi, tan(radiani));
+    printf("cot(%.2lf°) = %.4lf\n", gradusi, 1 / tan(radiani));
+
+    return 0;
+}
+
+int zadacha11(){
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+    int width;
+    int height;
+    int area;
+
+    printf("Vuvedete x1 y1 (tochka A): ");
+    scanf("%d %d", &x1, &y1);
+    printf("Vuvedete x2 y2 (tochka B): ");
+    scanf("%d %d", &x2, &y2);
+    width = x2 - x1;
+    if (width < 0) width = -width;
+    height = y2 - y1;
+    if (height < 0) height = -height;
+    area = width * height;
+    printf("Liceto na pravougulnika e: %d\n", area);
+    return 0;
+}
+
+int zadacha12(){
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+    int x3;
+    int y3;
+    int area2;
+    int area;
+    printf("Vuvedete x1, y1 (tochka A): ");
+    scanf("%d %d", &x1, &y1);
+    printf("Vuvedete x2, y2 (tochka B): ");
+    scanf("%d %d", &x2, &y2);
+    printf("Vuvedete x3, y3 (tochka C): ");
+    scanf("%d %d", &x3, &y3);
+    area2 = x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2);
+    if(area2 < 0) area2 = -area2;
+    area = area2 / 2;
+    printf("Liceto na triagalnika e: %d\n", area);
+    return 0;
+}
+
+
+int zadacha13(){
+     double w;
+   double h;
+   int rows;
+   int seats;
+   int total;
+   scanf("%lf %lf", &w, &h);
+   rows=(h*100)/120;
+   seats =((w*100)-150)/70;  
+   total = (rows *seats) -3;
+   printf("%d", total);
+   return 0;
+}
+
+int zadacha14(){
+    double prVegetables;
+double prFruit;
+int kgVegetables;
+int kgFruits;
+double leva;
+double euro;
+printf("price vegetables lv:");
+scanf("%lf", &prVegetables);
+
+printf("price fruit lv:");
+scanf("%lf", &prFruit);
+
+printf("kg of vegetables");
+scanf("%d", &kgVegetables);
+
+printf("kg of Fruits:");
+scanf("%d", &kgFruits);
+
+leva= prVegetables*kgVegetables + prFruit*kgFruits;
+euro = leva/1.95;
+printf("cena v evro e %lf\n", euro);
+return 0;
+}
+
+
+int zadacha15(){
+    
+double N;
+double W;
+double L;
+double M;
+double O;
+double areaPlay;
+double areaBench;
+double areaTile;
+double totaltiles;
+double totalTime;
+    printf("Vuvedete dulgina na ploshtadka (N) v metri: ");
+    scanf("%lf", &N);
+
+    printf("Vuvedete shirina na plochka (W) v metri: ");
+    scanf("%lf", &W);
+
+    printf("Vuvedete dulgina na plochka (L) v metri: ");
+    scanf("%lf", &L);
+
+    printf("Vuvedete shirina na peyka (M) v metri: ");
+    scanf("%lf", &M);
+
+    printf("Vuvedete dulgina na peyka (O) v metri: ");
+    scanf("%lf", &O);
+     areaPlay= N*N;
+     areaBench= M*O;
+     areaTile=W*L;
+     totaltiles = ceil((areaPlay - areaBench) / areaTile);
+
+    totalTime = totaltiles * 0.2; 
+
+    printf("Neobhodimi plochki: %lf\n", totaltiles);
+    printf("Obshto vreme za polagane: %lf minuti\n", totalTime);
+
+    return 0;
+}
+
+int zadacha16(){
+    int N;          
+    double M;        
+    double exchangeRate;
+    printf("Vuvedete sredno dni na rabota v mesec (N): ");
+    scanf("%d", &N);
+    printf("Vuvedete sredno prihodi na den v dolari (M): ");
+    scanf("%lf", &M);
+    printf("Vuvedete kurs na dolara spryamo leva: ");
+    scanf("%lf", &exchangeRate);
+    double monthlyIncome = N * M;
+    double yearlyIncome = monthlyIncome * 12;
+    double bonus = 2.5 * monthlyIncome;
+    double totalIncome = yearlyIncome + bonus;
+    double netIncome = totalIncome * 0.75;
+    double netIncomeBGN = netIncome * exchangeRate;
+    double averagePerDay = netIncomeBGN / 365;
+    printf("%lf\n", averagePerDay);
+
+    return 0;
+}
