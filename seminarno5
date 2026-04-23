@@ -1,0 +1,392 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
+#define MAX 100
+#define MAX 30
+
+struct Product {
+    char name[50];
+    double price;
+    int id;
+};
+
+struct Order {
+    char address[50];
+    int productId;
+};
+
+int isAnagram(char s1[], char s2[]) {
+int count[26] = {0};
+    if (strlen(s1) != strlen(s2)) {
+        return 0;
+    }
+for (int i = 0; s1[i] != '\0'; i++) {
+    char c = tolower(s1[i]);
+        count[c - 'a']++;
+    }
+for (int i = 0; s2[i] != '\0'; i++) {
+    char c = tolower(s2[i]);
+        count[c - 'a']--;
+    }
+for (int i = 0; i < 26; i++) {
+    if (count[i] != 0) {
+        return 0;
+        }
+    }
+    return 1;
+}
+
+typedef struct {
+int id;
+float hourlyRate;
+int hours;
+float salary;
+} Worker;
+
+void calculateSalary(Worker *w) {
+    int normalHours = 40;
+    float gross;
+    if (w->hours <= normalHours) {
+        gross = w->hours * w->hourlyRate;
+    } else {
+        int overtime = w->hours - normalHours;
+        gross = normalHours * w->hourlyRate +
+                overtime * w->hourlyRate * 1.5;
+    }
+    w->salary = gross - (gross * 0.0365); 
+}
+void addWorker() {
+    FILE *f = fopen("workers.dat", "ab");
+    if (f == NULL) {
+        printf("Greshka pri otvarqne na fail!\n");
+        return;
+    }
+    Worker w;
+    printf("Vuvedi ID: ");
+    scanf("%d", &w.id);
+    printf("Pochasovo zaplashtane: ");
+    scanf("%f", &w.hourlyRate);
+    printf("Broi chasove: ");
+    scanf("%d", &w.hours);
+    calculateSalary(&w);
+    fwrite(&w, sizeof(Worker), 1, f);
+    fclose(f);
+    printf("Satrudnik dobaven uspeshno!\n");
+}
+void showWorkers() {
+FILE *f = fopen("workers.dat", "rb");
+if (f == NULL) {
+printf("Nyama danni!\n");
+   return;
+    }
+Worker w;
+printf("\n--- Satrudnici ---\n");
+while (fread(&w, sizeof(Worker), 1, f)) {
+    printf("ID: %d | Zaplata: %.2f\n", w.id, w.salary);
+    }
+fclose(f);
+}
+int countWorkers() {
+    FILE *f = fopen("workers.dat", "rb");
+    if (f == NULL) return 0;
+Worker w;
+int count = 0;
+while (fread(&w, sizeof(Worker), 1, f)) {
+        count++;
+    }
+fclose(f);
+return count;
+}
+
+
+int zadacacha1();
+int zadacha2();
+int zadacha3();
+int zadacha4();
+int zadacha5();
+int zadacha6();
+int zadacha7();
+
+int main(){
+    zadacha7();
+    return 0;
+}
+int zadacha1(){
+    int guests;
+    printf("Vuvedete broya gostite: ");
+    scanf("%d",&guests);
+    int chairs = 0, tables = 0, cups = 0, dishes = 0;
+    char input[20];
+    double sum=0;
+     while(1) {
+        scanf("%s", input);
+        if(strcmp(input, "PARTY!") == 0)
+            break;
+
+        if(strcmp(input, "Chair") == 0) {
+            chairs++;
+            sum += 13.99;
+        }
+        else if(strcmp(input, "Table") == 0) {
+            tables++;
+            sum += 42.00;
+        }
+        else if(strcmp(input, "Cups") == 0) {
+            cups++;
+            sum += 5.98;
+        }
+        else if(strcmp(input, "Dishes") == 0) {
+            dishes++;
+            sum += 21.02;
+        }
+    }
+int neededChairs = guests;
+int neededTables = (int)ceil(guests / 8.0);
+int neededSets = (int)ceil(guests / 6.0);
+int missingChairs = neededChairs - chairs;
+int missingTables = neededTables - tables;
+int missingDishes = neededSets - dishes;
+    printf("%.2lf\n", sum);
+    if(missingTables > 0)
+        printf("%d Table\n", missingTables);
+    if(missingChairs > 0)
+        printf("%d Chairs\n", missingChairs);
+    if(missingDishes > 0)
+        printf("%d Dishes\n", missingDishes);
+    return 0;
+}
+
+
+int zadacha2(){
+struct Product products[MAX];
+struct Order orders[MAX];
+    int productCount = 0;
+    int orderCount = 0;
+    char command[20];
+    printf("Vuvedete komandi: Product / Order / END\n");
+    while(1) {
+        printf("\nKomanda: ");
+        scanf("%s", command);
+        if(strcmp(command, "END") == 0)
+            break;
+if(strcmp(command, "Product") == 0) {
+struct Product p;
+printf("Ime na produkt: ");
+scanf("%s", p.name);
+printf("Cena: ");
+scanf("%lf", &p.price);
+printf("ID na produkt: ");
+scanf("%d", &p.id);
+    products[productCount++] = p;
+        for(int i = 0; i < orderCount; i++) {
+            if(orders[i].productId == p.id) {
+                printf("Client %s ordered %s\n", orders[i].address, p.name);
+                    for(int j = i; j < orderCount - 1; j++) {
+                        orders[j] = orders[j + 1];
+                    }
+                    orderCount--;
+                    i--;
+                }
+            }
+        }
+        else if(strcmp(command, "Order") == 0) {
+            struct Order o;
+            printf("Adres: ");
+            scanf("%s", o.address);
+            printf("ID na produkt: ");
+            scanf("%d", &o.productId);
+            int found = 0;
+            for(int i = 0; i < productCount; i++) {
+                if(products[i].id == o.productId) {
+                    printf("Client %s ordered %s\n", o.address, products[i].name);
+                    found = 1;
+                    break;
+                }
+            }
+            if(!found) {
+                printf("Produkt nqma - porachkata chaka...\n");
+                orders[orderCount++] = o;
+            }
+        }
+else {
+            printf("Nepoznata komanda!\n");
+        }
+    }
+return 0;
+}
+
+int zadacha3(){
+    FILE *in, *bin;
+    char word[50];
+    char selected[100][50];
+    int count = 0;
+    printf("Vuvedi dumi v input.txt (po 1 duma ili razdeleni s interval)\n");
+    in = fopen("input.txt", "r");
+    if (in == NULL) {
+        printf("Greshka pri otvorqne na input.txt!\n");
+        return 1;
+    }
+    if (fscanf(in, "%49s", word) != 1) {
+        printf("Failat e prazen!\n");
+        fclose(in);
+        return 1;
+    }
+    strcpy(selected[count++], word);
+    while (fscanf(in, "%49s", word) == 1) {
+        if (count == 0) continue;
+        char last = selected[count - 1][strlen(selected[count - 1]) - 1];
+        if (tolower(word[0]) == tolower(last)) {
+            strcpy(selected[count++], word);
+        }
+    }
+    fclose(in);
+    bin = fopen("output.bin", "wb");
+    if (bin == NULL) {
+        printf("Greshka pri zapis v output.bin!\n");
+        return 1;
+    }
+    for (int i = 0; i < count; i++) {
+        fwrite(selected[i], sizeof(char), strlen(selected[i]), bin);
+        fputc(' ', bin);
+    }
+    fclose(bin);
+    bin = fopen("output.bin", "rb");
+    if (bin == NULL) {
+        printf("Greshka pri chetene na output.bin!\n");
+        return 1;
+    }
+    printf("Sadarjanie na faila:\n");
+    int ch;
+    while ((ch = fgetc(bin)) != EOF) {
+        putchar(ch);
+    }
+fclose(bin);
+printf("\n");
+return 0;
+}
+
+
+int zadacha4(){
+    char inputFile[100];
+    char outputFile[100] = "encoded.txt";
+    int key;
+    FILE *in, *out;
+    char ch;
+    printf("Vuvedi ime na faila za kodirane: ");
+    scanf("%99s", inputFile);
+    printf("Vuvedi kluch (2-10): ");
+    scanf("%d", &key);
+    if (key < 2 || key > 10) {
+        printf("Nevaliden kluch!\n");
+        return 1;
+    }
+    in = fopen(inputFile, "r");
+    if (in == NULL) {
+        printf("Ne moje da se otvori vhodniqt fail!\n");
+        return 1;
+    }
+    out = fopen(outputFile, "w");
+    if (out == NULL) {
+        printf("Greshka pri zapis v output fail!\n");
+        fclose(in);
+        return 1;
+    }
+    while ((ch = fgetc(in)) != EOF) {
+        ch = ch + key; 
+        fputc(ch, out);
+    }
+fclose(in);
+fclose(out);
+printf("Kodiraneto e zavursheno. Rezultat: encoded.txt\n");
+return 0;
+}
+
+int zadacha5(){
+char word[] = "concatenation";  
+int len = strlen(word);
+char guessed[100];
+int usedLetters = 0;
+int found = 0;
+for (int i = 0; i < len; i++) {
+    guessed[i] = '_';
+    }
+guessed[len] = '\0';
+printf("IGRA BESENICA\n");
+    while (found < len) {
+        printf("\nDuma: %s\n", guessed);
+        char letter;
+        printf("Vuvedi bukva: ");
+        scanf(" %c", &letter);
+        letter = tolower(letter);
+        usedLetters++;
+        int correct = 0;
+        for (int i = 0; i < len; i++) {
+            if (tolower(word[i]) == letter && guessed[i] == '_') {
+                guessed[i] = word[i];
+                correct = 1;
+                found++;
+            }
+        }
+        if (correct) {
+            printf("Poznata bukva!\n");
+        } else {
+            printf("Nqma takava bukva.\n");
+        }
+    }
+    printf("\nBRAVO! Duma: %s\n", word);
+    printf("Vavedeni bukvi: %d\n", usedLetters);
+    printf("Limit za pobeda: %d\n", len + 2);
+    if (usedLetters <= len + 2) {
+        printf("PODWINI! PECHELISH!\n");
+    } else {
+        printf("Zagubi - prekaleno mnogo opiti.\n");
+    }
+return 0;
+}
+
+int zadacha6(){ 
+char a[50], b[50];
+printf("Vuvedi purva duma: ");
+scanf("%s", a);
+printf("Vuvedi vtora duma: ");
+scanf("%s", b);
+if (isAnagram(a, b)) {
+    printf("dumite sa anagrami\n");
+} else {
+    printf("dumite ne sa anagrami\n");
+}
+return 0;
+}
+
+int zadacha7(){
+int choice;
+    while (1) {
+        printf("\nMENU\n");
+        printf("1. Dobavi satrudnik\n");
+        printf("2. Pokaji zaplati\n");
+        printf("3. Broi satrudnici\n");
+        printf("0. Izhod\n");
+        printf("Izbor: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                if (countWorkers() >= MAX) {
+                    printf("Dostignat maksimalen broi (30)!\n");
+                } else {
+                    addWorker();
+                }
+                break;
+            case 2:
+                showWorkers();
+                break;
+            case 3:
+                printf("Obsht broi: %d\n", countWorkers());
+                break;
+            case 0:
+                return 0;
+            default:
+                printf("Nevaliden izbor!\n");
+        }
+    }
+}
